@@ -22,3 +22,7 @@ Copy deployments/check-browser-update-authenticator-jar-with-dependencies.jar to
 ### Usage
 
 Add this authenticator to an authentication flow (I.E for the security admin console).
+
+# KUDOS
+
+https://github.com/acomdigital/ for the first version!
