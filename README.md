@@ -1,13 +1,14 @@
 
 # Keycloak Conditional Check Browser Update Authenticator
 
-This conditional authenticator can be activate to check the browser used via the 
+This authenticator can be included to check the browser used via the 
 [browser-update](http://browser-update.org "Browser-Update.org") code.
 
-
-Currently it always returns success, but if the browser is to old, the resp.
+Currently it always returns success, but if the browser is too old, the resp.
 info page is shown on the first login screen.
 
+By enabling test mode on the authenticator, the info screen can be configured
+to be always visible.
 
 ## Build
 
