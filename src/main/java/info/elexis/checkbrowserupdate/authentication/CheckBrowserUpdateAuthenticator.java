@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.keycloak.authentication.AuthenticationFlowContext;
 import org.keycloak.authentication.Authenticator;
+import org.keycloak.models.AuthenticatorConfigModel;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserModel;
@@ -42,9 +43,13 @@ public class CheckBrowserUpdateAuthenticator implements Authenticator {
 	public void authenticate(AuthenticationFlowContext context) {
 
 		boolean enableTestMode = false;
-		Map<String, String> config = context.getAuthenticatorConfig().getConfig();
-		if (config.containsKey(ENABLE_TEST_MODE)) {
-			enableTestMode = Boolean.valueOf(config.get(ENABLE_TEST_MODE));
+		AuthenticatorConfigModel authenticatorConfig = context.getAuthenticatorConfig();
+		if (authenticatorConfig != null) {
+			// setting a config is optional
+			Map<String, String> config = authenticatorConfig.getConfig();
+			if (config.containsKey(ENABLE_TEST_MODE)) {
+				enableTestMode = Boolean.valueOf(config.get(ENABLE_TEST_MODE));
+			}
 		}
 
 		String authServerBaseUrl = session.getContext().getUri().getBaseUri().toString();
