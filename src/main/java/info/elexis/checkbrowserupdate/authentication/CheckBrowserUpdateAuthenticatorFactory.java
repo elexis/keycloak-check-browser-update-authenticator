@@ -1,6 +1,6 @@
 package info.elexis.checkbrowserupdate.authentication;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 import org.keycloak.Config.Scope;
@@ -48,7 +48,7 @@ public class CheckBrowserUpdateAuthenticatorFactory implements AuthenticatorFact
 
 	@Override
 	public boolean isConfigurable() {
-		return false;
+		return true;
 	}
 
 	public static final AuthenticationExecutionModel.Requirement[] REQUIREMENT_CHOICES = {
@@ -71,7 +71,15 @@ public class CheckBrowserUpdateAuthenticatorFactory implements AuthenticatorFact
 
 	@Override
 	public List<ProviderConfigProperty> getConfigProperties() {
-		return Collections.emptyList();
+
+		ProviderConfigProperty enableTestMode = new ProviderConfigProperty();
+		enableTestMode.setType(ProviderConfigProperty.BOOLEAN_TYPE);
+		enableTestMode.setName(CheckBrowserUpdateAuthenticator.ENABLE_TEST_MODE);
+		enableTestMode.setLabel("Enable test mode");
+		enableTestMode.setDefaultValue(Boolean.FALSE);
+		enableTestMode.setHelpText("In test mode the banner is always visible");
+
+		return Arrays.asList(enableTestMode);
 	}
 
 }

@@ -20,8 +20,15 @@ public class JavascriptRealmResourceProvider implements RealmResourceProvider {
 	@GET
 	@Path("embedd.js")
 	@Produces("application/javascript")
-	public Response getJavascriptResource() {
+	public Response getEmbeddJs() {
 		return Response.ok(BrowserUpdateScriptTemplate.SCRIPT).build();
+	}
+
+	@GET
+	@Path("embedd-test.js")
+	@Produces("application/javascript")
+	public Response getEmbeddJsTest() {
+		return Response.ok(BrowserUpdateScriptTemplate.SCRIPT_TEST).build();
 	}
 
 	@Override

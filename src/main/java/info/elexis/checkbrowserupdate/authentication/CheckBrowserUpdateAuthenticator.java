@@ -1,5 +1,7 @@
 package info.elexis.checkbrowserupdate.authentication;
 
+import java.util.Map;
+
 import org.keycloak.authentication.AuthenticationFlowContext;
 import org.keycloak.authentication.Authenticator;
 import org.keycloak.models.KeycloakSession;
@@ -9,6 +11,8 @@ import org.keycloak.models.UserModel;
 import info.elexis.checkbrowserupdate.resource.JavascriptRealmResourceProviderFactory;
 
 public class CheckBrowserUpdateAuthenticator implements Authenticator {
+
+	public static final String ENABLE_TEST_MODE = "enableTestMode";
 
 	private KeycloakSession session;
 
@@ -36,9 +40,21 @@ public class CheckBrowserUpdateAuthenticator implements Authenticator {
 
 	@Override
 	public void authenticate(AuthenticationFlowContext context) {
+
+		boolean enableTestMode = false;
+		Map<String, String> config = context.getAuthenticatorConfig().getConfig();
+		if (config.containsKey(ENABLE_TEST_MODE)) {
+			enableTestMode = Boolean.valueOf(config.get(ENABLE_TEST_MODE));
+		}
+
 		String authServerBaseUrl = session.getContext().getUri().getBaseUri().toString();
 		String realmBaseUrl = authServerBaseUrl + "realms/" + context.getRealm().getName() + "/";
-		context.form().addScript(realmBaseUrl + JavascriptRealmResourceProviderFactory.RESOURCE_ID + "/embedd.js");
+		if (enableTestMode) {
+			context.form()
+					.addScript(realmBaseUrl + JavascriptRealmResourceProviderFactory.RESOURCE_ID + "/embedd-test.js");
+		} else {
+			context.form().addScript(realmBaseUrl + JavascriptRealmResourceProviderFactory.RESOURCE_ID + "/embedd.js");
+		}
 		context.success();
 	}
 
