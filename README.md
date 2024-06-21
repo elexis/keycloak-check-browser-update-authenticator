@@ -15,7 +15,7 @@ to be always visible.
 Use with Maven (>3) and JDK (>= 17).
 
 ```
-mvn clean install
+mvn clean verify
 ```
 
 Copy deployments/check-browser-update-authenticator-jar-with-dependencies.jar to /providers/ directory in Keycloak.
@@ -27,3 +27,7 @@ Add this authenticator to an authentication flow (I.E for the security admin con
 # KUDOS
 
 https://github.com/acomdigital/ for the first version!
+
+# VERSION
+
+0.2 - Updated for Keycloak 24.0.5
