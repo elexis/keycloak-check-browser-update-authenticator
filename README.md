@@ -12,7 +12,7 @@ to be always visible.
 
 ## Build
 
-Use with Maven (>3) and JDK (>= 17).
+Use with Maven (>3) and JDK (>= 21).
 
 ```
 mvn clean verify
@@ -30,4 +30,5 @@ https://github.com/acomdigital/ for the first version!
 
 # VERSION
 
+0.3 - Updated for Keycloak 26.1.5 and updatebrowser 2025.07
 0.2 - Updated for Keycloak 24.0.5
